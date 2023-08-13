@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <div class="container">
+        {% for listing in listings %}
+            <div class="row" onclick="location.href='{% url 'display_listing' listing.id %}'">
+                <div class="col-md-4 listing-img-div">
+                    {% if listing.url %}
+                        <img src="{{ listing.url }}" class="listing-img">
+                    {% else %}
+                        <h6>No image provided for this listing.</h6>
+                    {% endif %}
+                </div>
+                <div class="col-md-8 listing-details-div">
+                    <h3>{{ listing.title }}</h3>
+                    <p><h6 style="display:inline;">Price:</h6> ${{ listing.current_price }}</p>
+                    <br>
+                    <p style="color: gray">Posted by: {{ listing.user.username }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No active listings yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

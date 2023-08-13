@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+    <div class="container">
+        {% for list in watchlist %}
+            <div class="row" onclick="location.href='{% url 'display_listing' list.listing.id %}'">
+                <div class="col-md-4 listing-img-div">
+                    {% if list.listing.url %}
+                        <img src="{{ list.listing.url }}" class="listing-img">
+                    {% else %}
+                        <h6>No image provided for this listing.</h6>
+                    {% endif %}
+                </div>
+                <div class="col-md-8 listing-details-div">
+                    <h3>{{ list.listing.title }}</h3>
+                    <p><h6 style="display:inline;">Price:</h6> ${{ list.listing.current_price }}</p>
+                    <br>
+                    <p style="color: gray">Posted by: {{ list.listing.user.username }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No active listings yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>List of all Categories</h2>
+
+    <div class="flex-container">
+        {% for category in categories %}
+          <div>
+              <img src="../static/auctions/{{ category.img_name }}" class="cat_img">
+              <br>
+              <a href="{% url 'categorized_listings' category.id %}">{{ category.cat_name }}</a>
+          </div>
+        {% endfor %}
+    </div>
+{% endblock %}
